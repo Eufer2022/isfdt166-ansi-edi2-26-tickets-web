@@ -1,0 +1,22 @@
+
+[x-cloak] {
+    display: none !important;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+.hero.is-link {
+    background: linear-gradient(135deg, #2457a7, #3273dc);
+}
+
+.box {
+    border-radius: 10px;
+}
+
+footer {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1rem;
+}

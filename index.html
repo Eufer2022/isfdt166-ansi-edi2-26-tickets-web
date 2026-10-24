@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Tickets - ISFDT N.º 166</title>
+
+    <!-- Bulma: estilos de la interfaz -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    >
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- Alpine.js: interactividad -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+    <header class="hero is-link">
+        <div class="hero-body">
+            <div class="container">
+                <p class="title">Sistema de Gestión de Tickets</p>
+                <p class="subtitle">Soporte técnico · ISFDT N.º 166</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="section" x-data="{ pantalla: 'inicio' }">
+        <div class="container">
+            <h1 class="title is-4">Menú principal</h1>
+            <p class="mb-5">
+                Bienvenido al sistema. Seleccioná la operación que querés realizar.
+            </p>
+
+            <div class="columns is-multiline">
+                <div class="column is-6-tablet is-4-desktop">
+                    <div class="box">
+                        <h2 class="title is-5">Crear ticket</h2>
+                        <p class="mb-4">Registrar un nuevo pedido de soporte.</p>
+                        <button class="button is-link is-fullwidth"
+                                @click="pantalla = 'crear'">
+                            Crear ticket
+                        </button>
+                    </div>
+                </div>
+
+                <div class="column is-6-tablet is-4-desktop">
+                    <div class="box">
+                        <h2 class="title is-5">Consultar tickets</h2>
+                        <p class="mb-4">Consultar los tickets asociados a un DNI.</p>
+                        <button class="button is-link is-fullwidth"
+                                @click="pantalla = 'consultar'">
+                            Consultar tickets
+                        </button>
+                    </div>
+                </div>
+
+                <div class="column is-6-tablet is-4-desktop">
+                    <div class="box">
+                        <h2 class="title is-5">Panel de agente</h2>
+                        <p class="mb-4">Consultar tickets asignados y sus estados.</p>
+                        <button class="button is-link is-fullwidth"
+                                @click="pantalla = 'agente'">
+                            Abrir panel
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="box mt-5" x-show="pantalla === 'crear'" x-cloak>
+                <h2 class="title is-4">Crear un ticket</h2>
+
+                <form @submit.prevent="alert('La pantalla está preparada. El envío a la API se implementará después.')">
+                    <div class="field">
+                        <label class="label" for="dni">DNI</label>
+                        <div class="control">
+                            <input class="input" id="dni" type="text"
+                                   inputmode="numeric" pattern="[0-9]{7,8}"
+                                   placeholder="Ingresá tu DNI" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="categoria">Categoría</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select id="categoria" required>
+                                    <option value="">Seleccioná una categoría</option>
+                                    <option value="hardware">Hardware</option>
+                                    <option value="software">Software</option>
+                                    <option value="red">Red / Internet</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="descripcion">Descripción</label>
+                        <div class="control">
+                            <textarea class="textarea" id="descripcion"
+                                      placeholder="Describí el problema"
+                                      required></textarea>
+                        </div>
+                    </div>
+
+                    <button class="button is-link" type="submit">Enviar ticket</button>
+                    <button class="button is-light" type="button"
+                            @click="pantalla = 'inicio'">Volver</button>
+                </form>
+            </section>
+
+            <section class="box mt-5" x-show="pantalla === 'consultar'" x-cloak>
+                <h2 class="title is-4">Consultar mis tickets</h2>
+                <div class="field">
+                    <label class="label" for="dni-consulta">DNI</label>
+                    <div class="control">
+                        <input class="input" id="dni-consulta" type="text"
+                               inputmode="numeric" placeholder="Ingresá tu DNI">
+                    </div>
+                </div>
+                <button class="button is-link" type="button"
+                        @click="alert('La consulta de tickets se conectará a la API más adelante.')">
+                    Buscar
+                </button>
+                <button class="button is-light" type="button"
+                        @click="pantalla = 'inicio'">Volver</button>
+            </section>
+
+            <section class="box mt-5" x-show="pantalla === 'agente'" x-cloak>
+                <h2 class="title is-4">Panel de agente</h2>
+                <p class="mb-4">
+                    En esta sección se mostrarán los tickets asignados al agente.
+                </p>
+                <p class="mb-4">El listado y el cambio de estados se incorporarán al integrar la API.</p>
+                <button class="button is-light" type="button"
+                        @click="pantalla = 'inicio'">Volver al menú</button>
+            </section>
+
+            <footer class="has-text-grey mt-6">
+                <p>Proyecto académico · ISFDT N.º 166</p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
